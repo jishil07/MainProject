@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "953480899624",
+    "project_id": "homelineproject-68832",
+    "storage_bucket": "homelineproject-68832.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:953480899624:android:c9e1543b1ad1af079b591d",
+        "android_client_info": {
+          "package_name": "com.example.homeline"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBE0PNr4o2Q1oSAnue6Yn4MxwEwYsb2E64"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
