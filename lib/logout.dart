@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:homeline/account.dart';
-import 'package:homeline/third.dart';
+import 'package:homeline/second.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Logout extends StatefulWidget {
   const Logout({super.key});
@@ -89,11 +90,15 @@ class _LogoutState extends State<Logout> {
                 ElevatedButton(
                     style:
                         ElevatedButton.styleFrom(backgroundColor: Colors.blue),
-                    onPressed: () {
-                      Navigator.push(
+                    onPressed: () async {
+                      SharedPreferences preferences =
+                          await SharedPreferences.getInstance();
+                      preferences.remove("email");
+
+                      Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => Thirdscreen()));
+                              builder: (BuildContext) => Secondscreen()));
                     },
                     child: Text(
                       "Yes",

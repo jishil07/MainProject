@@ -1,4 +1,3 @@
-import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/material.dart';
 
 class Seeall extends StatefulWidget {
@@ -9,35 +8,100 @@ class Seeall extends StatefulWidget {
 }
 
 class _SeeallState extends State<Seeall> {
-  String dropdownvalue = 'Kaloor';
-
   var items = [
     'Kaloor',
-    'Palarivattom',
-    'Edapally',
+    'Kaloor',
+    'Kaloor',
+    'Kaloor',
     'Kakkanad',
-    'Vytila',
+    'Kakkanad',
+    'Kakkanad',
+    'Kakkanad',
     'Aluva',
+    'Aluva',
+    'Aluva',
+    'Aluva',
+    'Fort Kochi',
+    'Fort Kochi',
+    'Fort Kochi',
     'Fort Kochi'
   ];
 
   List img = [
-    "assets/novel-sea-view.jpg",
-    "assets/Stock-Modern-House-.jpg",
-    "assets/villa.webp",
-    "assets/villaaaa.jpg"
+    "assets/kaloor_apartment.jpg",
+    "assets/kaloor_house.jpg",
+    "assets/kaloor_villa1.webp",
+    "assets/kaloor_villa2.jpg",
+    "assets/kakkanad_apartment.jpg",
+    "assets/kakkanad_house.jpg",
+    "assets/kakkanad_villa1.jpg",
+    "assets/kakkanad_villa2.jpg",
+    "assets/aluva_apartment.webp",
+    "assets/aluva_house.jpg",
+    "assets/aluva_villa1.jpg",
+    "assets/aluva_villa2.jpg",
+    "assets/fortkochi_apartment.jpg",
+    "assets/fortkochi_house.jpg",
+    "assets/fortkochi_villa1.jpeg",
+    "assets/fortkochi_villa2.jpg",
   ];
 
-  List name = ["Apartment", "House", "Villa", "Villa"];
+  List name = [
+    "Apartment",
+    "House",
+    "Villa",
+    "Villa",
+    "Apartment",
+    "House",
+    "Villa",
+    "Villa",
+    "Apartment",
+    "House",
+    "Villa",
+    "Villa",
+    "Apartment",
+    "House",
+    "Villa",
+    "Villa"
+  ];
 
   List staytyp = [
+    "Primary Apartment",
+    "Mighty Cinco",
+    "Luxury Villa",
+    "Lagoon Villa",
+    "Primary Apartment",
+    "Mighty Cinco",
+    "Luxury Villa",
+    "Lagoon Villa",
+    "Primary Apartment",
+    "Mighty Cinco",
+    "Luxury Villa",
+    "Lagoon Villa",
     "Primary Apartment",
     "Mighty Cinco",
     "Luxury Villa",
     "Lagoon Villa"
   ];
 
-  List money = ["1,600", "999", "1,000", "1,500"];
+  List money = [
+    "1,600",
+    "999",
+    "1,000",
+    "1,500",
+    "1,600",
+    "999",
+    "1,000",
+    "1,500",
+    "1,600",
+    "999",
+    "1,000",
+    "1,500",
+    "1,600",
+    "999",
+    "1,000",
+    "1,500"
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -118,7 +182,7 @@ class _SeeallState extends State<Seeall> {
                           width: 10,
                         ),
                         Text(
-                          "${dropdownvalue}",
+                          items[index],
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                       ],
@@ -153,13 +217,6 @@ class _SeeallState extends State<Seeall> {
                           SizedBox(
                             width: 4,
                           ),
-                          FavoriteButton(
-                              iconColor: Colors.red,
-                              iconSize: 45,
-                              isFavorite: false,
-                              valueChanged: (_isFavourite) {
-                                print("Is Favourite $_isFavourite");
-                              })
                         ],
                       ),
                     ),

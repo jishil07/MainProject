@@ -1,4 +1,3 @@
-import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/material.dart';
 
 class Villa extends StatefulWidget {
@@ -9,25 +8,49 @@ class Villa extends StatefulWidget {
 }
 
 class _VillaState extends State<Villa> {
-  String dropdownvalue = 'Kaloor';
-
   var items = [
     'Kaloor',
-    'Palarivattom',
-    'Edapally',
+    'Kaloor',
     'Kakkanad',
-    'Vytila',
+    'Kakkanad',
     'Aluva',
+    'Aluva',
+    'Fort Kochi',
     'Fort Kochi'
   ];
 
-  List img = ["assets/villa.webp", "assets/villaaaa.jpg"];
+  List img = [
+    "assets/kaloor_villa1.webp",
+    "assets/kaloor_villa2.jpg",
+    "assets/kakkanad_villa1.jpg",
+    "assets/kakkanad_villa2.jpg",
+    "assets/aluva_villa1.jpg",
+    "assets/aluva_villa2.jpg",
+    "assets/fortkochi_villa1.jpeg",
+    "assets/fortkochi_villa2.jpg",
+  ];
 
-  List name = ["Villa", "Villa"];
+  List staytyp = [
+    "Luxury Villa",
+    "Lagoon Villa",
+    "Luxury Villa",
+    "Lagoon Villa",
+    "Luxury Villa",
+    "Lagoon Villa",
+    "Luxury Villa",
+    "Lagoon Villa"
+  ];
 
-  List staytyp = ["Luxury Villa", "Lagoon Villa"];
-
-  List money = ["1,000", "1,500"];
+  List money = [
+    "1,000",
+    "1,500",
+    "1,000",
+    "1,500",
+    "1,000",
+    "1,500",
+    "1,000",
+    "1,500"
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -82,7 +105,7 @@ class _VillaState extends State<Villa> {
                       Padding(
                         padding: const EdgeInsets.only(right: 40),
                         child: Text(
-                          name[index],
+                          "Villa",
                           style: TextStyle(color: Colors.blue),
                         ),
                       ),
@@ -109,7 +132,7 @@ class _VillaState extends State<Villa> {
                             width: 10,
                           ),
                           Text(
-                            "${dropdownvalue}",
+                            items[index],
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
                         ],
@@ -144,13 +167,6 @@ class _VillaState extends State<Villa> {
                             SizedBox(
                               width: 4,
                             ),
-                            FavoriteButton(
-                                iconColor: Colors.red,
-                                iconSize: 45,
-                                isFavorite: false,
-                                valueChanged: (_isFavourite) {
-                                  print("Is Favourite $_isFavourite");
-                                })
                           ],
                         ),
                       ),

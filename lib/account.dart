@@ -74,13 +74,13 @@ class _AccountState extends State<Account> {
                           textStyle: TextStyle(fontSize: 30)),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 15, top: 15),
-                    child: Text(
-                      "jishilkk4@gmail.com",
-                      style: GoogleFonts.truculenta(),
-                    ),
-                  )
+                  // Padding(
+                  //   padding: const EdgeInsets.only(left: 15, top: 15),
+                  //   child: Text(
+                  //     "jishilkk4@gmail.com",
+                  //     style: GoogleFonts.truculenta(),
+                  //   ),
+                  // )
                 ],
               )
             ],

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:homeline/fifth.dart';
+import 'package:homeline/fourth.dart';
 
 class Sixthscreen extends StatefulWidget {
   const Sixthscreen({super.key});
@@ -127,7 +127,7 @@ class _SixthscreenState extends State<Sixthscreen> {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => Fifthscreen()),
+                      MaterialPageRoute(builder: (context) => Fourthscreen()),
                     );
                   },
                   style: ElevatedButton.styleFrom(
@@ -136,8 +136,7 @@ class _SixthscreenState extends State<Sixthscreen> {
                     side: BorderSide(width: 1, color: Colors.black),
                     backgroundColor: Colors.blue,
                   ),
-                  child: Text("Request OTP",
-                      style: TextStyle(color: Colors.white))),
+                  child: Text("Verify", style: TextStyle(color: Colors.white))),
             ),
           ),
         ],

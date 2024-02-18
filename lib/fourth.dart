@@ -1,6 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:homeline/fifth.dart';
+import 'package:homeline/seventh.dart';
 import 'package:homeline/sixth.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Fourthscreen extends StatefulWidget {
   const Fourthscreen({super.key});
@@ -12,8 +14,10 @@ class Fourthscreen extends StatefulWidget {
 class _FourthscreenState extends State<Fourthscreen> {
   bool passwordVisible = false;
 
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +36,7 @@ class _FourthscreenState extends State<Fourthscreen> {
           ),
           Padding(
             padding: const EdgeInsets.only(left: 25, top: 15),
-            child: Text("Let's Sign You In.",
+            child: Text("Let's Log You In.",
                 style: TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
@@ -59,8 +63,9 @@ class _FourthscreenState extends State<Fourthscreen> {
           Padding(
             padding: const EdgeInsets.all(20),
             child: TextField(
-              controller: _emailController,
+              controller: emailController,
               decoration: InputDecoration(
+                  fillColor: Colors.white,
                   prefixIconColor: Colors.blue,
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(15),
@@ -73,7 +78,7 @@ class _FourthscreenState extends State<Fourthscreen> {
           Padding(
             padding: const EdgeInsets.all(20),
             child: TextField(
-              controller: _passwordController,
+              controller: passwordController,
               obscureText: passwordVisible,
               decoration: InputDecoration(
                 fillColor: Colors.white,
@@ -127,11 +132,52 @@ class _FourthscreenState extends State<Fourthscreen> {
             child: SizedBox(
               height: 60,
               child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => Fifthscreen()),
-                    );
+                  onPressed: () async {
+                    String email = emailController.text;
+                    String password = passwordController.text;
+
+                    try {
+                      UserCredential userCredential =
+                          await _auth.signInWithEmailAndPassword(
+                              email: email, password: password);
+                      print('Login Successful');
+                      print('User Logged In : ${userCredential.user!.uid}');
+                      SharedPreferences preferences =
+                          await SharedPreferences.getInstance();
+                      preferences.setString("email", emailController.text);
+
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text('Login Successful')));
+
+                      emailController.clear();
+                      passwordController.clear();
+
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => Seventhscreen()),
+                      );
+                    } on FirebaseAuthException catch (e) {
+                      if (e.code == 'user-not-found') {
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content:
+                                Text('Email not found . Please Sign Up .')));
+                      } else if (e.code == 'wrong-password') {
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: Text(
+                                'Incorrect password . Please try again .')));
+                      } else {
+                        print('Error Logging in : ${e.message}');
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content:
+                                Text('Error Logging In . Please try again')));
+                      }
+                    } catch (e) {
+                      print('Error Logging In : $e');
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content:
+                              Text('Error Logging In . Please try again')));
+                    }
                   },
                   style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(

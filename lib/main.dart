@@ -1,18 +1,43 @@
-
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:homeline/first.dart';
+import 'package:homeline/theme.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() => runApp(MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  SharedPreferences preferences = await SharedPreferences.getInstance();
+  var email = preferences.getString("email");
+  runApp(ChangeNotifierProvider(
+    create: (context) => ThemeProvider(),
+    child: MyApp(email: email,),
+  ));
+}
 
 
+// ignore: must_be_immutable
+class MyApp extends StatefulWidget {
+  var email;
+ MyApp({required this.email});
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  bool isDarkMode = false;
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Homescreen(),
+
+
+      theme: Provider.of<ThemeProvider>(context).isDarkMode
+          ? ThemeData.dark()
+          : ThemeData.light(),
+      home: Homescreen(email:widget.email),
       debugShowCheckedModeBanner: false,
     );
   }

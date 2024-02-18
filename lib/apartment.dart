@@ -1,4 +1,3 @@
-import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/material.dart';
 
 class Apartment extends StatefulWidget {
@@ -9,17 +8,16 @@ class Apartment extends StatefulWidget {
 }
 
 class _ApartmentState extends State<Apartment> {
-  String dropdownvalue = 'Kaloor';
+  var items = ['Kaloor', 'Kakkanad', 'Aluva', 'Fort Kochi'];
 
-  var items = [
-    'Kaloor',
-    'Palarivattom',
-    'Edapally',
-    'Kakkanad',
-    'Vytila',
-    'Aluva',
-    'Fort Kochi'
+  List img = [
+    "assets/kaloor_apartment.jpg",
+    "assets/kakkanad_apartment.jpg",
+    "assets/aluva_apartment.webp",
+    "assets/fortkochi_apartment.jpg"
   ];
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,102 +41,107 @@ class _ApartmentState extends State<Apartment> {
         ),
         centerTitle: true,
       ),
-      body: ListView(
-        children: [
-          Card(
-            elevation: 50,
-            color: Colors.white,
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: ClipRRect(
-                    clipBehavior: Clip.antiAlias,
-                    borderRadius: BorderRadius.circular(10),
-                    child: Image.asset(
-                      "assets/novel-sea-view.jpg",
-                      height: 110,
-                      width: 190,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-                Text(
-                  "Apartment",
-                  style: TextStyle(
-                      fontWeight: FontWeight.w500, color: Colors.blue),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(right: 10),
-                  child: Text(
-                    "Primary Apartment",
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Row(
+      body: ListView.builder(
+          scrollDirection: Axis.vertical,
+          itemCount: img.length,
+          itemBuilder: (contex, index) {
+            return Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Card(
+                elevation: 50,
+                color: Colors.white,
+                shadowColor: Colors.transparent,
+                child: Column(
                   children: [
-                    Icon(
-                      Icons.place_sharp,
-                      color: Colors.lightBlue,
+                    Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: ClipRRect(
+                        clipBehavior: Clip.antiAlias,
+                        borderRadius: BorderRadius.circular(10),
+                        child: Image.asset(
+                          img[index],
+                          height: 110,
+                          width: 190,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
                     ),
                     SizedBox(
-                      width: 10,
+                      height: 5,
                     ),
-                    Text(
-                      "${dropdownvalue}",
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 40),
+                      child: Text(
+                        "Apartment",
+                        style: TextStyle(color: Colors.blue),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 10),
+                      child: Text(
+                        "Primary Apartment",
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.place_sharp,
+                          color: Colors.lightBlue,
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          items[index],
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 10),
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.attach_money_sharp,
+                            color: Colors.amberAccent,
+                          ),
+                          SizedBox(
+                            width: 2,
+                          ),
+                          Text(
+                            "1600",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          SizedBox(
+                            width: 3,
+                          ),
+                          Text(
+                            "month",
+                            style: TextStyle(fontWeight: FontWeight.w300),
+                          ),
+                          SizedBox(
+                            width: 4,
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
-                SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  children: [
-                    Icon(
-                      Icons.attach_money_sharp,
-                      color: Colors.amberAccent,
-                    ),
-                    SizedBox(
-                      width: 2,
-                    ),
-                    Text(
-                      "1,600",
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    SizedBox(
-                      width: 3,
-                    ),
-                    Text(
-                      "month",
-                      style: TextStyle(fontWeight: FontWeight.w300),
-                    ),
-                    SizedBox(
-                      width: 4,
-                    ),
-                    FavoriteButton(
-                        iconColor: Colors.red,
-                        iconSize: 45,
-                        isFavorite: false,
-                        valueChanged: (_isFavourite) {
-                          print("Is Favourite $_isFavourite");
-                        })
-                  ],
-                )
-              ],
-            ),
-          )
-        ],
-      ),
+              ),
+            );
+          }), 
     );
   }
 }

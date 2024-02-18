@@ -1,19 +1,26 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:homeline/fourth.dart';
 
 class Thirdscreen extends StatefulWidget {
-  const Thirdscreen({super.key});
-
   @override
   State<Thirdscreen> createState() => _ThirdscreenState();
 }
 
 class _ThirdscreenState extends State<Thirdscreen> {
-  TextEditingController _usename = TextEditingController();
-  TextEditingController _email = TextEditingController();
-  TextEditingController _password = TextEditingController();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final DatabaseReference _databaseReference = FirebaseDatabase.instance.ref();
+
+  TextEditingController usernameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
+  ScaffoldMessengerState get _scaffoldMessenger =>
+      ScaffoldMessenger.of(context);
 
   bool passwordVisible = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,8 +67,9 @@ class _ThirdscreenState extends State<Thirdscreen> {
           Padding(
             padding: const EdgeInsets.all(20),
             child: TextField(
-              controller: _usename,
+              controller: usernameController,
               decoration: InputDecoration(
+                  fillColor: Colors.white,
                   prefixIconColor: Colors.blue,
                   enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15)),
@@ -73,8 +81,9 @@ class _ThirdscreenState extends State<Thirdscreen> {
           Padding(
             padding: const EdgeInsets.all(20),
             child: TextField(
-              controller: _email,
+              controller: emailController,
               decoration: InputDecoration(
+                  fillColor: Colors.white,
                   prefixIconColor: Colors.blue,
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(15),
@@ -87,7 +96,7 @@ class _ThirdscreenState extends State<Thirdscreen> {
           Padding(
             padding: const EdgeInsets.all(20),
             child: TextField(
-              controller: _password,
+              controller: passwordController,
               obscureText: passwordVisible,
               decoration: InputDecoration(
                 fillColor: Colors.white,
@@ -121,23 +130,62 @@ class _ThirdscreenState extends State<Thirdscreen> {
             child: SizedBox(
               height: 60,
               child: ElevatedButton(
-                    onPressed: () {
+                  onPressed: () async {
+                    String username = usernameController.text;
+                    String email = emailController.text;
+                    String password = passwordController.text;
+
+                    try {
+                      DataSnapshot snapshot = await _databaseReference
+                          .child('users')
+                          .child(username)
+                          .once()
+                          .then((event) => event.snapshot);
+
+                      if (snapshot.value != null) {
+                        _scaffoldMessenger.showSnackBar(SnackBar(
+                          content: Text('Username already exist .'),
+                        ));
+                        return;
+                      }
+
+                      UserCredential userCredential =
+                          await _auth.createUserWithEmailAndPassword(
+                              email: email, password: password);
+                      if (userCredential.user != null) {
+                        await _databaseReference.child('user/$username').set({
+                          'username': username,
+                          'email': email,
+                          'password': password,
+                        });
+                      }
+
+                      print('User Signed Up : ${userCredential.user!.uid}');
+
+                      usernameController.clear();
+                      emailController.clear();
+                      passwordController.clear();
+
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => Fourthscreen()),
                       );
-                    },
-                    style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15)),
-                      side: BorderSide(width: 1, color: Colors.black),
-                      backgroundColor: Colors.blue,
-                    ),
-                    child : Text(
-                            "Sign Up",
-                            style: TextStyle(color: Colors.white),
-                          )),
-              
+                    } catch (e) {
+                      print('Error Signing Up : $e');
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text('Error Signing Up : $e')));
+                    }
+                  },
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15)),
+                    side: BorderSide(width: 1, color: Colors.black),
+                    backgroundColor: Colors.blue,
+                  ),
+                  child: Text(
+                    "Sign Up",
+                    style: TextStyle(color: Colors.white),
+                  )),
             ),
           ),
           SizedBox(

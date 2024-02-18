@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_switch/flutter_switch.dart';
 import 'package:homeline/language.dart';
 import 'package:homeline/sixth.dart';
+import 'package:homeline/theme.dart';
+import 'package:provider/provider.dart';
 
 class Settings extends StatefulWidget {
   const Settings({super.key});
@@ -13,6 +14,7 @@ class Settings extends StatefulWidget {
 class _SettingsState extends State<Settings> {
   bool status = false;
   bool isSwitchOn = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -149,23 +151,37 @@ class _SettingsState extends State<Settings> {
                   style: TextStyle(fontSize: 18),
                 ),
                 title: Padding(
-                  padding: const EdgeInsets.only(left: 80, bottom: 15),
-                  child: FlutterSwitch(
-                    activeColor: Colors.green,
-                    width: 85,
-                    height: 40,
-                    valueFontSize: 0,
-                    toggleSize: 40,
-                    value: status,
-                    borderRadius: 30.0,
-                    padding: 8,
-                    onToggle: (val) {
-                      setState(() {
-                        status = val;
-                      });
-                    },
-                  ),
-                ),
+                    padding: const EdgeInsets.only(left: 80, bottom: 15),
+                    child: Switch(
+                        value: Provider.of<ThemeProvider>(context).isDarkMode,
+                        onChanged: (value) {
+                          Provider.of<ThemeProvider>(context, listen: false)
+                              .toggleDarkMode();
+                        })
+
+                    //       FlutterSwitch(
+                    //   value: isDarkMode,
+                    //   onToggle: (value) {
+                    //     toggleDarkMode();
+                    //   },
+                    //   activeColor: Colors.green,
+                    // ),
+                    // child: FlutterSwitch(
+                    //   activeColor: Colors.green,
+                    //   width: 85,
+                    //   height: 40,
+                    //   valueFontSize: 0,
+                    //   toggleSize: 40,
+                    //   value: status,
+                    //   borderRadius: 30.0,
+                    //   padding: 8,
+                    //   onToggle: (value) {
+                    //     setState(() {
+                    //       isDarkMode = value;
+                    //     });
+                    //   },
+                    // ),
+                    ),
               ),
             ),
           ),

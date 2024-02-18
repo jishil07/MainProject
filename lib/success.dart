@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:homeline/home.dart';
+import 'package:homeline/seventh.dart';
 
 class Success extends StatefulWidget {
   const Success({super.key});
@@ -80,7 +80,7 @@ class _SuccessState extends State<Success> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => Home(),
+                      builder: (context) => Seventhscreen(),
                     ));
               },
               style: ElevatedButton.styleFrom(

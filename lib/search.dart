@@ -14,31 +14,105 @@ class _SearchState extends State<Search> {
 
   var items = [
     'Kaloor',
-    'Palarivattom',
-    'Edapally',
     'Kakkanad',
-    'Vytila',
     'Aluva',
     'Fort Kochi'
   ];
 
-  List img = [
-    "assets/novel-sea-view.jpg",
-    "assets/Stock-Modern-House-.jpg",
-    "assets/villa.webp",
-    "assets/villaaaa.jpg"
+  List imgKaloor = [
+    "assets/kaloor_apartment.jpg",
+    "assets/kaloor_house.jpg",
+    "assets/kaloor_villa1.webp",
+    "assets/kaloor_villa2.jpg"
+  ];
+  List imgFortKochi = [
+    "assets/fortkochi_apartment.jpg",
+    "assets/fortkochi_house.jpg",
+    "assets/fortkochi_villa1.jpeg",
+    "assets/fortkochi_villa2.jpg"
+  ];
+
+  List imgKakkanad = [
+    "assets/kakkanad_apartment.jpg",
+    "assets/kakkanad_house.jpg",
+    "assets/kakkanad_villa1.jpg",
+    "assets/kakkanad_villa2.jpg"
+  ];
+
+  List imgAluva = [
+    "assets/aluva_apartment.webp",
+    "assets/aluva_house.jpg",
+    "assets/aluva_villa1.jpg",
+    "assets/aluva_villa2.jpg"
   ];
 
   List name = ["Apartment", "House", "Villa", "Villa"];
 
-  List staytyp = [
+ List staytypKaloor = [
     "Primary Apartment",
-    "Mighty Cinco",
+    "Bungalow",
     "Luxury Villa",
     "Lagoon Villa"
   ];
 
-  List money = ["1,600", "999", "1,000", "1,500"];
+  List staytypKakkanad = [
+    "Primary Apartment",
+    "Bungalow",
+    "Luxury Villa",
+    "Lagoon Villa"
+  ];
+
+  List staytypAluva = [
+    "Primary Apartment",
+    "Bungalow",
+    "Luxury Villa",
+    "Lagoon Villa"
+  ];
+
+  List staytypFortKochi = [
+    "Primary Apartment",
+    "Bungalow",
+    "Luxury Villa",
+    "Lagoon Villa"
+  ];
+
+  List moneyKaloor = ["1,600", "999", "1,000", "1,500"];
+
+  List moneyKakkanad = ["1,600", "999", "1,000", "1,500"];
+
+  List moneyAluva = ["1,600", "999", "1,000", "1,500"];
+
+  List moneyFortKochi = ["1,600", "999", "1,000", "1,500"];
+
+  var imgMain = [];
+  var moneyMain = [];
+  var staytypMain = [];
+
+   @override
+  void initState() {
+    super.initState();
+    if (dropdownvalue == "Kaloor") {
+      imgMain = imgKaloor;
+      moneyMain = moneyKaloor;
+      staytypMain = staytypKaloor;
+    }
+    if (dropdownvalue == "Kakkanad") {
+      imgMain = imgKakkanad;
+      moneyMain = moneyKakkanad;
+      staytypMain = staytypKakkanad;
+    }
+        if (dropdownvalue == "Aluva") {
+      imgMain = imgAluva;
+      moneyMain = moneyAluva;
+      staytypMain = staytypAluva;
+    }
+        if (dropdownvalue == "Fort Kochi") {
+      imgMain = imgFortKochi;
+      moneyMain = moneyFortKochi;
+      staytypMain = staytypFortKochi;
+    }
+  }
+
 
   final TextEditingController _searchController = TextEditingController();
 
@@ -95,6 +169,18 @@ class _SearchState extends State<Search> {
                             onChanged: (String? newValue) {
                               setState(() {
                                 dropdownvalue = newValue!;
+                                 if (dropdownvalue == "Kaloor") {
+                                  imgMain = imgKaloor;
+                                }
+                                if (dropdownvalue == "Kakkanad") {
+                                  imgMain = imgKakkanad;
+                                }
+                                if (dropdownvalue == "Aluva") {
+                                  imgMain = imgAluva;
+                                }
+                                if (dropdownvalue == "Fort Kochi") {
+                                  imgMain = imgFortKochi;
+                                }
                               });
                             }),
                       ),
@@ -130,7 +216,7 @@ class _SearchState extends State<Search> {
             padding: const EdgeInsets.only(top: 400, left: 10, right: 10),
             child: ListView.builder(
                 scrollDirection: Axis.horizontal,
-                itemCount: img.length,
+                itemCount: imgMain.length,
                 itemBuilder: (contex, index) {
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -145,7 +231,7 @@ class _SearchState extends State<Search> {
                               clipBehavior: Clip.antiAlias,
                               borderRadius: BorderRadius.circular(10),
                               child: Image.asset(
-                                img[index],
+                                imgMain[index],
                                 height: 110,
                                 width: 190,
                                 fit: BoxFit.cover,
@@ -168,7 +254,7 @@ class _SearchState extends State<Search> {
                           Padding(
                             padding: const EdgeInsets.only(right: 10),
                             child: Text(
-                              staytyp[index],
+                              staytypMain[index],
                               style: TextStyle(fontWeight: FontWeight.bold),
                             ),
                           ),
@@ -205,7 +291,7 @@ class _SearchState extends State<Search> {
                                   width: 2,
                                 ),
                                 Text(
-                                  money[index],
+                                  moneyMain[index],
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                   ),

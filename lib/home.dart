@@ -8,7 +8,7 @@ import 'package:homeline/seeall.dart';
 import 'package:homeline/villa.dart';
 
 class Home extends StatefulWidget {
-  const Home({super.key});
+  const Home({Key? key}) : super(key: key);
 
   @override
   State<Home> createState() => _HomeState();
@@ -16,35 +16,104 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   final TextEditingController _searchController = TextEditingController();
+
   String dropdownvalue = 'Kaloor';
 
-  var items = [
-    'Kaloor',
-    'Palarivattom',
-    'Edapally',
-    'Kakkanad',
-    'Vytila',
-    'Aluva',
-    'Fort Kochi'
+  var items = ['Kaloor', 'Kakkanad', 'Aluva', 'Fort Kochi'];
+
+  List imgKaloor = [
+    "assets/kaloor_apartment.jpg",
+    "assets/kaloor_house.jpg",
+    "assets/kaloor_villa1.webp",
+    "assets/kaloor_villa2.jpg"
+  ];
+  List imgFortKochi = [
+    "assets/fortkochi_apartment.jpg",
+    "assets/fortkochi_house.jpg",
+    "assets/fortkochi_villa1.jpeg",
+    "assets/fortkochi_villa2.jpg"
   ];
 
-  List img = [
-    "assets/novel-sea-view.jpg",
-    "assets/Stock-Modern-House-.jpg",
-    "assets/villa.webp",
-    "assets/villaaaa.jpg"
+  List imgKakkanad = [
+    "assets/kakkanad_apartment.jpg",
+    "assets/kakkanad_house.jpg",
+    "assets/kakkanad_villa1.jpg",
+    "assets/kakkanad_villa2.jpg"
+  ];
+
+  List imgAluva = [
+    "assets/aluva_apartment.webp",
+    "assets/aluva_house.jpg",
+    "assets/aluva_villa1.jpg",
+    "assets/aluva_villa2.jpg"
   ];
 
   List name = ["Apartment", "House", "Villa", "Villa"];
 
-  List staytyp = [
+  List staytypKaloor = [
     "Primary Apartment",
-    "Mighty Cinco",
+    "Bungalow",
     "Luxury Villa",
     "Lagoon Villa"
   ];
 
-  List money = ["1,600", "999", "1,000", "1,500"];
+  List staytypKakkanad = [
+    "Primary Apartment",
+    "Bungalow",
+    "Luxury Villa",
+    "Lagoon Villa"
+  ];
+
+  List staytypAluva = [
+    "Primary Apartment",
+    "Bungalow",
+    "Luxury Villa",
+    "Lagoon Villa"
+  ];
+
+  List staytypFortKochi = [
+    "Primary Apartment",
+    "Bungalow",
+    "Luxury Villa",
+    "Lagoon Villa"
+  ];
+
+  List moneyKaloor = ["1,600", "999", "1,000", "1,500"];
+
+  List moneyKakkanad = ["1,600", "999", "1,000", "1,500"];
+
+  List moneyAluva = ["1,600", "999", "1,000", "1,500"];
+
+  List moneyFortKochi = ["1,600", "999", "1,000", "1,500"];
+
+  var imgMain = [];
+  var moneyMain = [];
+  var staytypMain = [];
+
+  @override
+  void initState() {
+    super.initState();
+    if (dropdownvalue == "Kaloor") {
+      imgMain = imgKaloor;
+      moneyMain = moneyKaloor;
+      staytypMain = staytypKaloor;
+    }
+    if (dropdownvalue == "Kakkanad") {
+      imgMain = imgKakkanad;
+      moneyMain = moneyKakkanad;
+      staytypMain = staytypKakkanad;
+    }
+    if (dropdownvalue == "Aluva") {
+      imgMain = imgAluva;
+      moneyMain = moneyAluva;
+      staytypMain = staytypAluva;
+    }
+    if (dropdownvalue == "Fort Kochi") {
+      imgMain = imgFortKochi;
+      moneyMain = moneyFortKochi;
+      staytypMain = staytypFortKochi;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,6 +132,18 @@ class _HomeState extends State<Home> {
                   onChanged: (String? newValue) {
                     setState(() {
                       dropdownvalue = newValue!;
+                      if (dropdownvalue == "Kaloor") {
+                        imgMain = imgKaloor;
+                      }
+                      if (dropdownvalue == "Kakkanad") {
+                        imgMain = imgKakkanad;
+                      }
+                      if (dropdownvalue == "Aluva") {
+                        imgMain = imgAluva;
+                      }
+                      if (dropdownvalue == "Fort Kochi") {
+                        imgMain = imgFortKochi;
+                      }
                     });
                   }),
               trailing: IconButton(
@@ -231,7 +312,7 @@ class _HomeState extends State<Home> {
             maxHeight: 320,
             child: ListView.builder(
                 scrollDirection: Axis.horizontal,
-                itemCount: img.length,
+                itemCount: imgMain.length,
                 itemBuilder: (contex, index) {
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -241,9 +322,10 @@ class _HomeState extends State<Home> {
                           context,
                           MaterialPageRoute(
                               builder: (context) => Details(
-                                    staytyps: staytyp[index],
+                                    staytyps: staytypMain[index],
                                     names: name[index],
-                                    moneys: money[index],
+                                    moneys: moneyMain[index],
+                                    imageurl: imgMain[index].toString(),
                                   )),
                         );
                       },
@@ -259,7 +341,7 @@ class _HomeState extends State<Home> {
                                 clipBehavior: Clip.antiAlias,
                                 borderRadius: BorderRadius.circular(10),
                                 child: Image.asset(
-                                  img[index],
+                                  imgMain[index],
                                   height: 110,
                                   width: 190,
                                   fit: BoxFit.cover,
@@ -282,7 +364,7 @@ class _HomeState extends State<Home> {
                             Padding(
                               padding: const EdgeInsets.only(right: 10),
                               child: Text(
-                                staytyp[index],
+                                staytypMain[index],
                                 style: TextStyle(fontWeight: FontWeight.bold),
                               ),
                             ),
@@ -319,7 +401,7 @@ class _HomeState extends State<Home> {
                                     width: 2,
                                   ),
                                   Text(
-                                    money[index],
+                                    moneyMain[index],
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                     ),
@@ -336,12 +418,13 @@ class _HomeState extends State<Home> {
                                     width: 4,
                                   ),
                                   FavoriteButton(
-                                      iconColor: Colors.red,
-                                      iconSize: 45,
-                                      isFavorite: false,
-                                      valueChanged: (_isFavourite) {
-                                        print("Is Favourite $_isFavourite");
-                                      })
+                                    iconColor: Colors.red,
+                                    iconSize: 45,
+                                    isFavorite: false,
+                                    valueChanged: (_isFavourite) {
+                                      print("Is Favorite ${_isFavourite}");
+                                    },
+                                  )
                                 ],
                               ),
                             ),
@@ -378,3 +461,5 @@ class _HomeState extends State<Home> {
     );
   }
 }
+
+

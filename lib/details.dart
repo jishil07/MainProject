@@ -5,12 +5,15 @@ import 'package:flutter/material.dart';
 import 'package:homeline/payment.dart';
 
 class Details extends StatefulWidget {
-  String staytyps, names, moneys;
+  String staytyps, names, moneys, imageurl;
+
   Details(
       {super.key,
       required this.staytyps,
       required this.names,
-      required this.moneys});
+      required this.moneys,
+      required this.imageurl
+      });
 
   @override
   State<Details> createState() => _DetailsState();
@@ -53,14 +56,14 @@ class _DetailsState extends State<Details> {
     }
 
     return Scaffold(
-      body: Column(
+      body: ListView(
         children: [
           Container(
             width: double.infinity,
             height: 300,
             decoration: BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage("assets/novel-sea-view.jpg"),
+                  image: AssetImage(widget.imageurl),
                   fit: BoxFit.cover),
             ),
             child: Stack(
@@ -138,7 +141,7 @@ class _DetailsState extends State<Details> {
                   height: 10,
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(5),
                   child: Text(
                     "Kayyath Ln, Janatha, Palarivattom, Kochi, Ernakulam, Kerala 682025",
                     style: TextStyle(fontWeight: FontWeight.w400),
@@ -169,7 +172,7 @@ class _DetailsState extends State<Details> {
                   ),
                 ),
                 SizedBox(
-                  height: 25,
+                  height: 13,
                 ),
                 Padding(
                   padding: const EdgeInsets.only(right: 250),
@@ -179,14 +182,14 @@ class _DetailsState extends State<Details> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(7),
                   child: Text(
                     "Located in the hills above Nice, in a secure gated residence community, this luxurious villa is the perfect place for a family , for up to 10 persons. With 3 air-conditioned bedrooms, fully equipped kitchen, HD home theater, large garden, private pool and everything you will need or want for a pleasant stay among family and friends. Great location, near from the center of Nice, 5 km away from the sea.",
                     style: TextStyle(fontWeight: FontWeight.w300),
                   ),
                 ),
                 SizedBox(
-                  height: 20,
+                  height: 8,
                 ),
                 Padding(
                   padding: const EdgeInsets.only(right: 260),
@@ -196,10 +199,10 @@ class _DetailsState extends State<Details> {
                   ),
                 ),
                 SizedBox(
-                  height: 7,
+                  height: 5,
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 25),
+                  padding: const EdgeInsets.all(8.0),
                   child: Row(
                     children: [
                       Icon(

@@ -1,6 +1,8 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:homeline/fourth.dart';
+import 'package:homeline/seventh.dart';
 import 'package:homeline/third.dart';
 
 class Secondscreen extends StatefulWidget {
@@ -11,6 +13,18 @@ class Secondscreen extends StatefulWidget {
 }
 
 class _SecondscreenState extends State<Secondscreen> {
+  GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email']);
+
+  Future<void> _handleSignIn() async {
+    try {
+      await _googleSignIn.signIn();
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => Seventhscreen()));
+    } catch (e) {
+      print(e);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,7 +38,7 @@ class _SecondscreenState extends State<Secondscreen> {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8),
                         image: DecorationImage(
-                          image: AssetImage("assets/download.jpeg"),
+                          image: AssetImage("assets/aluva_apartment.webp"),
                           fit: BoxFit.cover,
                         )),
                   ),
@@ -33,7 +47,7 @@ class _SecondscreenState extends State<Secondscreen> {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8),
                         image: DecorationImage(
-                          image: AssetImage("assets/novel-sea-view.jpg"),
+                          image: AssetImage("assets/aluva_house.jpg"),
                           fit: BoxFit.cover,
                         )),
                   ),
@@ -42,7 +56,7 @@ class _SecondscreenState extends State<Secondscreen> {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8),
                         image: DecorationImage(
-                          image: AssetImage("assets/Stock-Modern-House-.jpg"),
+                          image: AssetImage("assets/aluva_villa1.jpg"),
                           fit: BoxFit.cover,
                         )),
                   ),
@@ -51,7 +65,7 @@ class _SecondscreenState extends State<Secondscreen> {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8),
                         image: DecorationImage(
-                          image: AssetImage("assets/villa.webp"),
+                          image: AssetImage("assets/aluva_villa2.jpg"),
                           fit: BoxFit.cover,
                         )),
                   ),
@@ -60,7 +74,106 @@ class _SecondscreenState extends State<Secondscreen> {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8),
                         image: DecorationImage(
-                          image: AssetImage("assets/villaaaa.jpg"),
+                          image: AssetImage("assets/fortkochi_apartment.jpg"),
+                          fit: BoxFit.cover,
+                        )),
+                  ),
+                  Container(
+                    margin: EdgeInsets.all(6),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        image: DecorationImage(
+                          image: AssetImage("assets/fortkochi_house.jpg"),
+                          fit: BoxFit.cover,
+                        )),
+                  ),
+                  Container(
+                    margin: EdgeInsets.all(6),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        image: DecorationImage(
+                          image: AssetImage("assets/fortkochi_villa1.jpeg"),
+                          fit: BoxFit.cover,
+                        )),
+                  ),
+                  Container(
+                    margin: EdgeInsets.all(6),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        image: DecorationImage(
+                          image: AssetImage("assets/fortkochi_villa2.jpg"),
+                          fit: BoxFit.cover,
+                        )),
+                  ),
+                  Container(
+                    margin: EdgeInsets.all(6),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        image: DecorationImage(
+                          image: AssetImage("assets/kakkanad_apartment.jpg"),
+                          fit: BoxFit.cover,
+                        )),
+                  ),
+                  Container(
+                    margin: EdgeInsets.all(6),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        image: DecorationImage(
+                          image: AssetImage("assets/kakkanad_house.jpg"),
+                          fit: BoxFit.cover,
+                        )),
+                  ),
+                  Container(
+                    margin: EdgeInsets.all(6),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        image: DecorationImage(
+                          image: AssetImage("assets/kakkanad_villa1.jpg"),
+                          fit: BoxFit.cover,
+                        )),
+                  ),
+                  Container(
+                    margin: EdgeInsets.all(6),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        image: DecorationImage(
+                          image: AssetImage("assets/kakkanad_villa2.jpg"),
+                          fit: BoxFit.cover,
+                        )),
+                  ),
+                  Container(
+                    margin: EdgeInsets.all(6),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        image: DecorationImage(
+                          image: AssetImage("assets/kaloor_apartment.jpg"),
+                          fit: BoxFit.cover,
+                        )),
+                  ),
+                  Container(
+                    margin: EdgeInsets.all(6),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        image: DecorationImage(
+                          image: AssetImage("assets/kaloor_house.jpg"),
+                          fit: BoxFit.cover,
+                        )),
+                  ),
+                  Container(
+                    margin: EdgeInsets.all(6),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        image: DecorationImage(
+                          image: AssetImage("assets/kaloor_villa1.webp"),
+                          fit: BoxFit.cover,
+                        )),
+                  ),
+                   Container(
+                    margin: EdgeInsets.all(6),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        image: DecorationImage(
+                          image: AssetImage("assets/kaloor_villa2.jpg"),
                           fit: BoxFit.cover,
                         )),
                   ),
@@ -101,7 +214,7 @@ class _SecondscreenState extends State<Secondscreen> {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => Fourthscreen()),
+                      MaterialPageRoute(builder: (context) => Thirdscreen()),
                     );
                   },
                   style: ElevatedButton.styleFrom(
@@ -122,7 +235,7 @@ class _SecondscreenState extends State<Secondscreen> {
                           width: 10,
                         ),
                         Text(
-                          "Login with Email ",
+                          "Sign Up  with Email ",
                           style: TextStyle(
                               color: Colors.white, fontWeight: FontWeight.bold),
                         )
@@ -131,7 +244,6 @@ class _SecondscreenState extends State<Secondscreen> {
                   )),
             ),
           ),
-      
           SizedBox(
             height: 40,
           ),
@@ -156,7 +268,9 @@ class _SecondscreenState extends State<Secondscreen> {
                 width: 150,
                 height: 50,
                 child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      _handleSignIn();
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.white,
                     ),
@@ -181,7 +295,7 @@ class _SecondscreenState extends State<Secondscreen> {
             child: Row(
               children: [
                 Text(
-                  "Dont have an account -",
+                  "Do you have an account -",
                   style: TextStyle(
                       color: Colors.black,
                       fontStyle: FontStyle.italic,
@@ -189,7 +303,7 @@ class _SecondscreenState extends State<Secondscreen> {
                 ),
                 InkWell(
                     child: Text(
-                      'Sign Up',
+                      'Log In',
                       style: TextStyle(
                         fontSize: 15,
                         color: Colors.blue,
@@ -199,7 +313,7 @@ class _SecondscreenState extends State<Secondscreen> {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => Thirdscreen()),
+                        MaterialPageRoute(builder: (context) => Fourthscreen()),
                       );
                     })
               ],
