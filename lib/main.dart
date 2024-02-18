@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:homeline/favorite_data_model.dart';
 import 'package:homeline/first.dart';
 import 'package:homeline/theme.dart';
 import 'package:provider/provider.dart';
@@ -10,10 +11,16 @@ void main() async {
   await Firebase.initializeApp();
   SharedPreferences preferences = await SharedPreferences.getInstance();
   var email = preferences.getString("email");
-  runApp(ChangeNotifierProvider(
-    create: (context) => ThemeProvider(),
+  runApp(
+
+    MultiProvider(providers: [
+       ChangeNotifierProvider<ThemeProvider>(create: (_) => ThemeProvider(),),
+       ChangeNotifierProvider<FavoriteDataModel>(create: (_) => FavoriteDataModel()),
+    ],
+
     child: MyApp(email: email,),
-  ));
+    )
+  );
 }
 
 

@@ -2,10 +2,12 @@ import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/material.dart';
 import 'package:homeline/apartment.dart';
 import 'package:homeline/details.dart';
+import 'package:homeline/favorite_data_model.dart';
 import 'package:homeline/house.dart';
 import 'package:homeline/notification.dart';
 import 'package:homeline/seeall.dart';
 import 'package:homeline/villa.dart';
+import 'package:provider/provider.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -117,6 +119,9 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    // ignore: unused_local_variable
+    final FavoriteData = Provider.of<FavoriteDataModel>(context);
+
     return Scaffold(
       body: ListView(
         children: [
@@ -461,5 +466,3 @@ class _HomeState extends State<Home> {
     );
   }
 }
-
-

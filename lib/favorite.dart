@@ -1,9 +1,9 @@
 import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/material.dart';
+import 'package:homeline/favorite_data_model.dart';
+import 'package:provider/provider.dart';
 
 class Favorite extends StatefulWidget {
-
-
   @override
   State<Favorite> createState() => _FavoriteState();
 }
@@ -11,6 +11,8 @@ class Favorite extends StatefulWidget {
 class _FavoriteState extends State<Favorite> {
   @override
   Widget build(BuildContext context) {
+    final favoriteData = Provider.of<FavoriteDataModel>(context);
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -32,7 +34,7 @@ class _FavoriteState extends State<Favorite> {
       ),
       body: ListView.builder(
           scrollDirection: Axis.vertical,
-          itemCount: 0,
+          itemCount: favoriteData.imgMain.length,
           itemBuilder: (contex, index) {
             return Padding(
               padding: const EdgeInsets.all(8.0),
@@ -48,7 +50,7 @@ class _FavoriteState extends State<Favorite> {
                         clipBehavior: Clip.antiAlias,
                         borderRadius: BorderRadius.circular(10),
                         child: Image.asset(
-                          "",
+                          favoriteData.imgMain[index],
                           height: 110,
                           width: 190,
                           fit: BoxFit.cover,
@@ -61,7 +63,7 @@ class _FavoriteState extends State<Favorite> {
                     Padding(
                       padding: const EdgeInsets.only(right: 40),
                       child: Text(
-                        "",
+                        favoriteData.name[index],
                         style: TextStyle(color: Colors.blue),
                       ),
                     ),
@@ -71,7 +73,7 @@ class _FavoriteState extends State<Favorite> {
                     Padding(
                       padding: const EdgeInsets.only(right: 10),
                       child: Text(
-                        "",
+                        favoriteData.staytypMain[index],
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ),
@@ -88,7 +90,7 @@ class _FavoriteState extends State<Favorite> {
                           width: 10,
                         ),
                         Text(
-                          "",
+                          favoriteData.items[index],
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                       ],
@@ -108,7 +110,7 @@ class _FavoriteState extends State<Favorite> {
                             width: 2,
                           ),
                           Text(
-                            "",
+                            favoriteData.moneyMain[index],
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                             ),
@@ -129,7 +131,7 @@ class _FavoriteState extends State<Favorite> {
                               isFavorite: true,
                               valueChanged: (_isFavourite) {
                                 print("Is Favourite $_isFavourite");
-                              })
+                              }),
                         ],
                       ),
                     ),
@@ -141,9 +143,3 @@ class _FavoriteState extends State<Favorite> {
     );
   }
 }
-
-
-
-
-
-

@@ -1,4 +1,4 @@
-import 'package:favorite_button/favorite_button.dart';
+
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -12,12 +12,7 @@ class Search extends StatefulWidget {
 class _SearchState extends State<Search> {
   String dropdownvalue = 'Kaloor';
 
-  var items = [
-    'Kaloor',
-    'Kakkanad',
-    'Aluva',
-    'Fort Kochi'
-  ];
+  var items = ['Kaloor', 'Kakkanad', 'Aluva', 'Fort Kochi'];
 
   List imgKaloor = [
     "assets/kaloor_apartment.jpg",
@@ -48,7 +43,7 @@ class _SearchState extends State<Search> {
 
   List name = ["Apartment", "House", "Villa", "Villa"];
 
- List staytypKaloor = [
+  List staytypKaloor = [
     "Primary Apartment",
     "Bungalow",
     "Luxury Villa",
@@ -88,7 +83,7 @@ class _SearchState extends State<Search> {
   var moneyMain = [];
   var staytypMain = [];
 
-   @override
+  @override
   void initState() {
     super.initState();
     if (dropdownvalue == "Kaloor") {
@@ -101,18 +96,17 @@ class _SearchState extends State<Search> {
       moneyMain = moneyKakkanad;
       staytypMain = staytypKakkanad;
     }
-        if (dropdownvalue == "Aluva") {
+    if (dropdownvalue == "Aluva") {
       imgMain = imgAluva;
       moneyMain = moneyAluva;
       staytypMain = staytypAluva;
     }
-        if (dropdownvalue == "Fort Kochi") {
+    if (dropdownvalue == "Fort Kochi") {
       imgMain = imgFortKochi;
       moneyMain = moneyFortKochi;
       staytypMain = staytypFortKochi;
     }
   }
-
 
   final TextEditingController _searchController = TextEditingController();
 
@@ -169,7 +163,7 @@ class _SearchState extends State<Search> {
                             onChanged: (String? newValue) {
                               setState(() {
                                 dropdownvalue = newValue!;
-                                 if (dropdownvalue == "Kaloor") {
+                                if (dropdownvalue == "Kaloor") {
                                   imgMain = imgKaloor;
                                 }
                                 if (dropdownvalue == "Kakkanad") {
@@ -306,13 +300,6 @@ class _SearchState extends State<Search> {
                                 SizedBox(
                                   width: 5,
                                 ),
-                                FavoriteButton(
-                                    iconColor: Colors.red,
-                                    iconSize: 45,
-                                    isFavorite: false,
-                                    valueChanged: (_isFavourite) {
-                                      print("Is Favourite $_isFavourite");
-                                    })
                               ],
                             ),
                           ),
